@@ -18,7 +18,7 @@ namespace Persistence.Context
         public override Task<int> SaveChangesAsync(CancellationToken cancellation = new CancellationToken())
         {
             //TODO: agregar despues la AuditableEntityBase
-            foreach (var entry in base.ChangeTracker.Entries<EntityBaseAuditable>())
+            foreach (var entry in base.ChangeTracker.Entries<EntityBaseAuditable<Guid, Guid>>())
             {
                 switch (entry.State)
                 {

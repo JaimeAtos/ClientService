@@ -11,6 +11,7 @@ namespace Application.Features.ClientPosition.Commands.UpdateClientPositionCommn
         public Guid ClientId { get; set; }
         public Guid PositionId { get; set; }
         public string PositionName { get; set; }
+        public string RomaId { get; set; }
     }
 
     public class UpdateClientPositionCommnadHandler : IRequestHandler<UpdateClientPositionCommnad, Response<Domain.Entities.ClientPosition>>

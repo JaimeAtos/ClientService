@@ -22,14 +22,14 @@ namespace ClientServiceApi.Controllers
         public async Task<IActionResult> CreateClientPosition([FromBody] CreateClientPositionCommand createClientPositionCommand)
         {
             var response = await _mediator.Send(createClientPositionCommand);
-            return Ok(response);
+            return CreatedAtRoute("GetClientPositionById", new { id = response.Data.Id}, createClientPositionCommand);
         }
 
         [HttpDelete("/DeleteClientPosition")]
         public async Task<IActionResult> DeleteClientPosition([FromBody] DeleteClientPositionCommand deleteClientPositionCommand)
         {
             var response = await _mediator.Send(deleteClientPositionCommand);
-            return Ok(response);
+            return NoContent();
         }
 
         [HttpPut("/UpdateClientPosition")]
@@ -46,7 +46,7 @@ namespace ClientServiceApi.Controllers
             return Ok(response);
         }
 
-        [HttpGet("/GetClientPositionById/{id}")]
+        [HttpGet("/GetClientPositionById/{id}", Name = "GetClientPositionById")]
         public async Task<IActionResult> GetClientPositionById(Guid id)
         {
             var response = await _mediator.Send(new GetClientPositionByIdQuery() { Id = id});

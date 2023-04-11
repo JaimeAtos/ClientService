@@ -10,6 +10,7 @@ namespace Application.Features.ClientPosition.Commands.CreateClientPositionComma
         public Guid ClientId { get; set; }
         public Guid PositionId { get; set; }
         public string PositionName { get; set; }
+        public string RomaId { get; set; }
     }
 
     public class CreateClientPositionCommandHandler : IRequestHandler<CreateClientPositionCommand, Response<Domain.Entities.ClientPosition>>

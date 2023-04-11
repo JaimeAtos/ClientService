@@ -17,19 +17,20 @@ namespace ClientServiceApi.Controllers
         {
             _mediator = mediator;
         }
-
+       
         [HttpPost("/CreateClient")]
         public async Task<IActionResult> CreateClient([FromBody] CreateClientCommand createClientCommand)
         {
             var response = await _mediator.Send(createClientCommand);
-            return Ok(response);
+
+            return CreatedAtRoute("GetClientById", new { id = response.Data.Id }, createClientCommand); ;
         }
 
         [HttpDelete("/DeleteClient")]
         public async Task<IActionResult> DeleteClient([FromBody] DeleteClientCommand deleteClientCommand)
         {
             var response = await _mediator.Send(deleteClientCommand);
-            return Ok(response);
+            return NoContent();
         }
         [HttpPut("/UpdateClient")]
         public async Task<IActionResult> UpdateClient([FromBody] UpdateClientCommand updateClientCommand)
@@ -44,7 +45,7 @@ namespace ClientServiceApi.Controllers
             return Ok(response);
         }
 
-        [HttpGet("/GetClientById/{id}")]
+        [HttpGet("/GetClientById/{id}",Name = "GetClientById")]
         public async Task<IActionResult> GetClientById(Guid id)
         {
             var response = await _mediator.Send(new GetClientByIdQuery() { Id = id});

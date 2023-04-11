@@ -18,10 +18,10 @@ namespace Application.Features.Client.Commands.CreateClientCommand
             RuleFor(c => c.LocationId)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull();
-            RuleFor(c => c.CountPositions)
+            RuleFor(c => c.LocationName)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull()
-                .GreaterThan(0).WithMessage("{PropertyName} must be greater than 0.");
+                .MaximumLength(150).WithMessage("{PropertyName} must not exceed 150 characters.");
         }
     }
 }

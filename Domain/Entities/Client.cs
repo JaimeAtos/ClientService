@@ -3,17 +3,13 @@ using System.Data.Common;
 
 namespace Domain.Entities;
 
-public class Client : EntityBaseAuditable
+public class Client : EntityBaseAuditable<Guid, Guid>
 {
     public string Name { get; set; }
-    public IEnumerable<Location> Location { get; set; }
+    public Guid LocationId { get; set; }
+    public string LocationName { get; set; }
     public int CountPositions { get; set; }
 }
 
 
-public class Location
-{
-    public Guid Id { get; set; }
-    public string LocationName { get; set; }
-}
 

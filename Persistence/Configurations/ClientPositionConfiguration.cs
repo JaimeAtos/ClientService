@@ -14,6 +14,7 @@ namespace Persistence.Configurations
             builder.Property(x => x.PositionId).HasColumnType("UNIQUEIDENTIFIER");
             builder.Property(x => x.PositionName).HasColumnType("varchar(120)");
             builder.Property(x => x.ClientId).HasColumnType("UNIQUEIDENTIFIER");
+            builder.Property(x => x.RomaId).HasColumnType("varchar(50)");
         }
     }
 }

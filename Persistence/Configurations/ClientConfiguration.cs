@@ -18,7 +18,7 @@ namespace Persistence.Configurations
             builder.Property(c => c.Id).HasDefaultValue("NEWID()");
             builder.Property(c => c.Name).HasColumnType("varchar(120)");
             builder.Property(c => c.CountPositions).HasColumnType("int");
-
+            builder.Property(c => c.LocationName).HasColumnType("varchar(150)");
            
         }
     }
