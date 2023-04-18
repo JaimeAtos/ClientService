@@ -8,7 +8,7 @@ namespace Application.Features.Client.Commands.DeleteClientCommand
     public class DeleteClientCommand : IRequest<Response<Domain.Entities.Client>>
     {
         public Guid Id { get; set; }
-        public bool State { get; set; }
+       
     }
 
     public class DeleteClientCommandHandler : IRequestHandler<DeleteClientCommand, Response<Domain.Entities.Client>>
@@ -39,7 +39,7 @@ namespace Application.Features.Client.Commands.DeleteClientCommand
             }
             else
             {
-                client.State = request.State;
+                client.State = false;
                 await _repositoryAsync.UpdateAsync(client);
                 return new Response<Domain.Entities.Client>(client);
             }

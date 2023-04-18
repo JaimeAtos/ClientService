@@ -9,5 +9,6 @@ namespace Application.DTOs
         public Guid LocationId { get; set; }
         public string LocationName { get; set; }
         public int CountPositions { get; set; }
+        public bool State { get; set; }
     }
 }

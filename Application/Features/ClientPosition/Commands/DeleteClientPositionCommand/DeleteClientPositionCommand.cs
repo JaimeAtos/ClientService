@@ -2,18 +2,13 @@
 using Application.Interfaces;
 using Application.Wrappers;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.ClientPosition.Commands.DeleteClientPositionCommand
 {
     public class DeleteClientPositionCommand : IRequest<Response<Domain.Entities.ClientPosition>>
     {
         public Guid Id { get; set; }
-        public bool State { get; set; }
+ 
     }
 
     public class DeleteClientPositionCommandHandler : IRequestHandler<DeleteClientPositionCommand, Response<Domain.Entities.ClientPosition>>
@@ -40,7 +35,7 @@ namespace Application.Features.ClientPosition.Commands.DeleteClientPositionComma
             }
             else
             {
-                clientPosition.State = request.State;
+                clientPosition.State = false;
                 await _repositoryAsync.UpdateAsync(clientPosition);
                 return new Response<Domain.Entities.ClientPosition>(clientPosition);
             }
