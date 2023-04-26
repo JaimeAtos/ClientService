@@ -11,7 +11,8 @@ namespace Domain.Entities
     {
         public Guid ClientId { get; set; }
         public Guid PositionId { get; set; }
-        public string PositionName { get; set; }
-        public string RomaId { get; set; }
+        public string PositionDescription { get; set; }
+        public Guid CurrentStateID { get; set; }
+        public string CurrentStateName { get; set; }
     }
 }

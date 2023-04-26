@@ -15,6 +15,8 @@ namespace Persistence.Context
 
         public DbSet<Client> Clients { get; set; }
         public DbSet<ClientPosition> ClientsPositions { get; set; }
+        public DbSet<ClientPositionManager> ClientPositionManagers { get; set; }
+        public DbSet<LeaveRequest> LeaveRequests { get; set; }
         public override Task<int> SaveChangesAsync(CancellationToken cancellation = new CancellationToken())
         {
             //TODO: agregar despues la AuditableEntityBase
@@ -33,6 +35,16 @@ namespace Persistence.Context
                 }
             }
             return base.SaveChangesAsync(cancellation);
+        }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ClientPosition>()
+            .HasOne<ClientPositionManager>()
+            .WithOne()
+            .HasForeignKey<ClientPositionManager>(e => e.ClientPositionId)
+            .IsRequired();
         }
     }
 }

@@ -10,8 +10,9 @@ namespace Application.Features.ClientPosition.Commands.UpdateClientPositionCommn
         public Guid Id { get; set; }
         public Guid ClientId { get; set; }
         public Guid PositionId { get; set; }
-        public string PositionName { get; set; }
-        public string RomaId { get; set; }
+        public string PositionDescription { get; set; }
+        public Guid CurrentStateID { get; set; }
+        public string CurrentStateName { get; set; }
     }
 
     public class UpdateClientPositionCommnadHandler : IRequestHandler<UpdateClientPositionCommnad, Response<Domain.Entities.ClientPosition>>
@@ -34,7 +35,7 @@ namespace Application.Features.ClientPosition.Commands.UpdateClientPositionCommn
                 throw new ApiExceptions($"register {request.Id} Not Found");
             }
 
-            clientPosition.PositionName = request.PositionName;
+            clientPosition.PositionDescription = request.PositionDescription;
 
             await _repositoryAsync.UpdateAsync(clientPosition);
             return new Response<Domain.Entities.ClientPosition>(clientPosition);

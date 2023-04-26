@@ -39,6 +39,7 @@ namespace Application.Features.Client.Commands.DeleteClientCommand
             }
             else
             {
+           
                 client.State = false;
                 await _repositoryAsync.UpdateAsync(client);
                 return new Response<Domain.Entities.Client>(client);

@@ -12,9 +12,10 @@ namespace Persistence.Configurations
             builder.ConfigurationBase<Guid, Guid, ClientPosition>("ClientsPositions");
             builder.Property(x => x.Id).HasDefaultValue("NEWID()");
             builder.Property(x => x.PositionId).HasColumnType("UNIQUEIDENTIFIER");
-            builder.Property(x => x.PositionName).HasColumnType("varchar(120)");
+            builder.Property(x => x.PositionDescription).HasColumnType("varchar(120)");
             builder.Property(x => x.ClientId).HasColumnType("UNIQUEIDENTIFIER");
-            builder.Property(x => x.RomaId).HasColumnType("varchar(50)");
+            builder.Property(x => x.CurrentStateID).HasColumnType("UNIQUEIDENTIFIER");
+            builder.Property(x => x.CurrentStateName).HasColumnType("varchar(40)");
         }
     }
 }

@@ -10,5 +10,6 @@ namespace Application.DTOs
         public string LocationName { get; set; }
         public int CountPositions { get; set; }
         public bool State { get; set; }
+        public string? LeaveReason { get; set; }
     }
 }

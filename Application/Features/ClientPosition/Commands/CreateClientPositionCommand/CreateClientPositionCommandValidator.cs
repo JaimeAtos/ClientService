@@ -12,14 +12,17 @@ namespace Application.Features.ClientPosition.Commands.CreateClientPositionComma
             RuleFor(c => c.PositionId)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull();
-            RuleFor(c => c.PositionName)
+            RuleFor(c => c.PositionDescription)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull()
                 .MaximumLength(80).WithMessage("{PropertyName} must not exceed 80 characters.");
-            RuleFor(c => c.RomaId)
+            RuleFor(c => c.CurrentStateID)
+                .NotEmpty().WithMessage("{PropertyName} is required.")
+                .NotNull();
+            RuleFor(c => c.CurrentStateName)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull()
-                .MaximumLength(80).WithMessage("{PropertyName} must not exceed 80 characters.");
+                .MaximumLength(40).WithMessage("{PropertyName} must not exceed 80 characters.");
         }
     }
 }

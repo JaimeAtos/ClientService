@@ -12,7 +12,7 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ClientContext))]
-    [Migration("20230324165110_InitialMigration")]
+    [Migration("20230424183319_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -37,11 +37,18 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<DateTime?>("DateLastModify")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LeaveReason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("LocationId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("LocationName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -51,6 +58,9 @@ namespace Persistence.Migrations
                         .HasColumnType("bit");
 
                     b.Property<Guid>("UserCreatorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserModifierId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -70,18 +80,22 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid>("CurrentStateID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("ModifiedDate")
+                    b.Property<string>("CurrentStateName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DateLastModify")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("PositionDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("PositionId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("PositionName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("State")
                         .HasColumnType("bit");
@@ -89,41 +103,60 @@ namespace Persistence.Migrations
                     b.Property<Guid>("UserCreatorId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("UserModifierId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.ToTable("ClientsPositions");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Location", b =>
+            modelBuilder.Entity("Domain.Entities.ClientPositionManager", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ClientId")
+                    b.Property<Guid>("ClientPositionId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("LocationName")
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateLastModify")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Resource")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("ResourceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("State")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("UserCreatorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserModifierId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("ClientPositionId")
+                        .IsUnique();
 
-                    b.ToTable("Location");
+                    b.ToTable("ClientPositionManagers");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Location", b =>
+            modelBuilder.Entity("Domain.Entities.ClientPositionManager", b =>
                 {
-                    b.HasOne("Domain.Entities.Client", null)
-                        .WithMany("Location")
-                        .HasForeignKey("ClientId");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Client", b =>
-                {
-                    b.Navigation("Location");
+                    b.HasOne("Domain.Entities.ClientPosition", null)
+                        .WithOne()
+                        .HasForeignKey("Domain.Entities.ClientPositionManager", "ClientPositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
