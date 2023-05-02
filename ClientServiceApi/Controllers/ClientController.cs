@@ -1,12 +1,10 @@
 ﻿using Application.Features.Client.Commands.CreateClientCommand;
 using Application.Features.Client.Commands.DeleteClientCommand;
-using Application.Features.Client.Commands.DeleteClientWithReasonCommandd;
 using Application.Features.Client.Commands.UpdateClientCommnad;
 using Application.Features.Client.Queries.GetAllClients;
 using Application.Features.Client.Queries.GetClientById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 
 namespace ClientServiceApi.Controllers
@@ -45,13 +43,7 @@ namespace ClientServiceApi.Controllers
             return NoContent();
         }
 
-        [HttpDelete("/ClientDesease")]
-        public async Task<IActionResult> ClientDesease(DeleteClientWithReasonCommand command)
-        {
-            var response = await _mediator.Send(command);
-            return Ok(response);
-        }
-
+ 
         [HttpPut("/UpdateClient")]
         public async Task<IActionResult> UpdateClient([FromBody] UpdateClientCommand updateClientCommand)
         {
@@ -59,9 +51,12 @@ namespace ClientServiceApi.Controllers
             return Ok(response);
         }
         [HttpGet("/GetAllClients")]
-        public async Task<IActionResult> GetAllClients()
+        public async Task<IActionResult> GetAllClients([FromQuery] GetAllClientsParameter filter)
         {
-            var response = await _mediator.Send(new GetAllClientsQuery());
+            var response = await _mediator.Send(new GetAllClientsQuery { 
+                PageNumber = filter.PageNumber,
+                PageSize = filter.PageSize
+            });
             return Ok(response);
         }
 

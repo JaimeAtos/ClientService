@@ -22,6 +22,7 @@ namespace Application.Features.Client.Commands.CreateClientCommand
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull()
                 .MaximumLength(150).WithMessage("{PropertyName} must not exceed 150 characters.");
+            
         }
     }
 }

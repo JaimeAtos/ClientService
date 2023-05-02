@@ -25,10 +25,7 @@ namespace Application.Features.Client.Commands.UpdateClientCommnad
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull()
                 .GreaterThan(0).WithMessage("{PropertyName} must be greater than 0.");
-            RuleFor(c => c.LocationName)
-                .NotEmpty().WithMessage("{PropertyName} is required.")
-                .NotNull()
-                .MaximumLength(150).WithMessage("{PropertyName} must not exceed 150 characters.");
+           
         }
     }
     

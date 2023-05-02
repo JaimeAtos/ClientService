@@ -9,7 +9,7 @@ public class Client : EntityBaseAuditable<Guid, Guid>
     public Guid LocationId { get; set; }
     public string LocationName { get; set; }
     public int CountPositions { get; set; }
-    public string? LeaveReason { get; set; }
+
 }
 
 
