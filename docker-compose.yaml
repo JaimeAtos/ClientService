@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: clientservice_postgresql
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=prueba123
+      - POSTGRES_USER=clientservicedb
+      - POSTGRES_DB=clientservicedb
+    ports:
+      - '5432:5432'
+    expose:
+      - 5432
+    volumes:
+      - ./postgresql/database/data:/var/lib/postgresql/da
