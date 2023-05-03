@@ -7,21 +7,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{71A923FA-F19
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{205A12AA-1EB1-4F43-9C51-2078F491CD07}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7CAFA968-561B-42CC-BA86-F640732A017E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "src\Core", "{7CAFA968-561B-42CC-BA86-F640732A017E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestructure", "Infraestructure", "{055ED808-8227-43A6-9AF6-A6FA8AEB72F5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestructure", "src\Infraestructure", "{055ED808-8227-43A6-9AF6-A6FA8AEB72F5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{44DB965B-3031-454A-A823-7F67E6A03E8F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "src\Presentation", "{44DB965B-3031-454A-A823-7F67E6A03E8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{B33A44CD-8A0E-41A5-BDC6-20C57DD4CE1F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "src\Application\Application.csproj", "{B33A44CD-8A0E-41A5-BDC6-20C57DD4CE1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{A649A5CA-B6F5-4166-B41A-25D926CBB26B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\Domain\Domain.csproj", "{A649A5CA-B6F5-4166-B41A-25D926CBB26B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{6957C168-D444-4A6E-82F5-99410C1921F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "src\Persistence\Persistence.csproj", "{6957C168-D444-4A6E-82F5-99410C1921F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{04D5C969-EFF6-4C04-BF06-D8907A755C74}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "src\Shared\Shared.csproj", "{04D5C969-EFF6-4C04-BF06-D8907A755C74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientServiceApi", "ClientServiceApi\ClientServiceApi.csproj", "{12E78D43-D041-42E4-AFDE-B49D46414F37}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientServiceApi", "src\ClientServiceApi\ClientServiceApi.csproj", "{12E78D43-D041-42E4-AFDE-B49D46414F37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atos.Core", "..\Atos.Core\src\Atos.Core\Atos.Core.csproj", "{B62DCADE-EE59-4361-BC82-607B38652F36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{12E78D43-D041-42E4-AFDE-B49D46414F37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12E78D43-D041-42E4-AFDE-B49D46414F37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12E78D43-D041-42E4-AFDE-B49D46414F37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B62DCADE-EE59-4361-BC82-607B38652F36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B62DCADE-EE59-4361-BC82-607B38652F36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B62DCADE-EE59-4361-BC82-607B38652F36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B62DCADE-EE59-4361-BC82-607B38652F36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
