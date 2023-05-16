@@ -8,9 +8,9 @@ namespace Application.Features.Client.Commands.CreateClientCommand
 {
     public class CreateClientCommand : IRequest<Response<Domain.Entities.Client>>
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
         public Guid LocationId { get; set; }
-        public string LocationName { get; set; }
+        public string LocationName { get; set; } = null!;
         public int CountPositions { get; set; }
     }
 
@@ -28,7 +28,7 @@ namespace Application.Features.Client.Commands.CreateClientCommand
         {
             if (request == null)
             {
-                throw new Exception();
+                throw new ArgumentNullException(nameof(request), "Create request is empty");
             }
             return HandleProcess(request, cancellationToken);
         }

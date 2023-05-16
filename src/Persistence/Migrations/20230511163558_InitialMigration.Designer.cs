@@ -12,7 +12,7 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ClientContext))]
-    [Migration("20230502220542_InitialMigration")]
+    [Migration("20230511163558_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -77,7 +77,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("CurrentStateID")
+                    b.Property<Guid>("CurrentStateId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("CurrentStateName")
@@ -104,6 +104,8 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
 
                     b.ToTable("ClientsPositions");
                 });
@@ -153,6 +155,9 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("ClientPositionId")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -161,9 +166,6 @@ namespace Persistence.Migrations
 
                     b.Property<string>("LeaveReasonComments")
                         .HasColumnType("text");
-
-                    b.Property<Guid>("PositionId")
-                        .HasColumnType("uuid");
 
                     b.Property<Guid>("ReasonId")
                         .HasColumnType("uuid");
@@ -182,7 +184,21 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClientPositionId")
+                        .IsUnique();
+
                     b.ToTable("LeaveRequests");
+                });
+
+            modelBuilder.Entity("Domain.Entities.ClientPosition", b =>
+                {
+                    b.HasOne("Domain.Entities.Client", "Client")
+                        .WithMany("ClientPositions")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("Domain.Entities.ClientPositionManager", b =>
@@ -192,6 +208,20 @@ namespace Persistence.Migrations
                         .HasForeignKey("Domain.Entities.ClientPositionManager", "ClientPositionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.LeaveRequest", b =>
+                {
+                    b.HasOne("Domain.Entities.ClientPosition", null)
+                        .WithOne()
+                        .HasForeignKey("Domain.Entities.LeaveRequest", "ClientPositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.Client", b =>
+                {
+                    b.Navigation("ClientPositions");
                 });
 #pragma warning restore 612, 618
         }

@@ -9,8 +9,7 @@ namespace Persistence.Configurations
         public void Configure(EntityTypeBuilder<ClientPosition> builder)
         {
             builder.ConfigurationBase<Guid, Guid, ClientPosition>("ClientsPositions");
-            builder.Property(x => x.PositionDescription).HasColumnType("varchar(120)"); ;
-            builder.Property(x => x.CurrentStateID).HasColumnType("UNIQUEIDENTIFIER");
+            builder.Property(x => x.PositionDescription).HasColumnType("varchar(120)");
             builder.Property(x => x.CurrentStateName).HasColumnType("varchar(40)");
         }
     }

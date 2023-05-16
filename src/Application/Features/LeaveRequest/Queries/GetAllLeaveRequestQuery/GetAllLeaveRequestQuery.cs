@@ -38,7 +38,6 @@ namespace Application.Features.LeaveRequest.Queries.GetAllLeaveRequestQuery
             var leaveRequests = await _repositoryAsync.ListAsync(pagination);
             var leaveRequestsDto = _mapper.Map<List<LeaveRequestDTO>>(leaveRequests);
             return new PagedResponse<List<LeaveRequestDTO>>(leaveRequestsDto, request.PageNumber, request.PageSize);
-
         }
     }
 }

@@ -6,8 +6,9 @@ namespace Domain.Entities
     {
         public Guid ClientId { get; set; }
         public Guid PositionId { get; set; }
-        public string PositionDescription { get; set; }
-        public Guid CurrentStateID { get; set; }
-        public string CurrentStateName { get; set; }
+        public string PositionDescription { get; set; } = null!;
+        public Guid CurrentStateId { get; set; }
+        public string CurrentStateName { get; set; } = null!;
+        public Client Client { get; set; } = null!;
     }
 }

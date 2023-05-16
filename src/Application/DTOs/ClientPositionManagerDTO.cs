@@ -11,7 +11,7 @@ namespace Application.DTOs
         public Guid Id { get; set; }
         public Guid ClientPositionId { get; set; }
         public Guid ResourceId { get; set; }
-        public string Resource { get; set; }
+        public string Resource { get; set; } = null!;
         public bool State { get; set; }
     }
 }

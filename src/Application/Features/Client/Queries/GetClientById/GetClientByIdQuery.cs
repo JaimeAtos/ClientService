@@ -27,7 +27,7 @@ namespace Application.Features.Client.Queries.GetClientById
         {
             if (request == null)
             {
-                throw new ApiExceptions();
+                throw new ArgumentNullException(nameof(request), "Get by id request is empty");
             }
 
             var client = await _repositoryAsync.GetByIdAsync(request.Id);

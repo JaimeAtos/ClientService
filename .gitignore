@@ -10,6 +10,8 @@
 *.userosscache
 *.sln.docstates
 postgresql/
+**/obj
+**/bin
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -341,6 +343,8 @@ ASALocalRun/
 healthchecksdb
 
 # SonarQube
-/.sonarqube
 .sonarqube/
+/.sonarqube
 coverage.opencover.xml
+/.vscode
+/doc/sample/api/1. Overview.md

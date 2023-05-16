@@ -39,7 +39,7 @@ namespace Persistence.Migrations
                     ClientId = table.Column<Guid>(type: "uuid", nullable: false),
                     PositionId = table.Column<Guid>(type: "uuid", nullable: false),
                     PositionDescription = table.Column<string>(type: "text", nullable: false),
-                    CurrentStateID = table.Column<Guid>(type: "uuid", nullable: false),
+                    CurrentStateId = table.Column<Guid>(type: "uuid", nullable: false),
                     CurrentStateName = table.Column<string>(type: "text", nullable: false),
                     State = table.Column<bool>(type: "boolean", nullable: false),
                     UserCreatorId = table.Column<Guid>(type: "uuid", nullable: false),
@@ -50,26 +50,12 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ClientsPositions", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "LeaveRequests",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    PositionId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ResourceId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ReasonId = table.Column<Guid>(type: "uuid", nullable: false),
-                    LeaveReasonComments = table.Column<string>(type: "text", nullable: true),
-                    State = table.Column<bool>(type: "boolean", nullable: false),
-                    UserCreatorId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UserModifierId = table.Column<Guid>(type: "uuid", nullable: false),
-                    DateLastModify = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LeaveRequests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ClientsPositions_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -97,9 +83,46 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "LeaveRequests",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    ClientPositionId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ResourceId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ReasonId = table.Column<Guid>(type: "uuid", nullable: false),
+                    LeaveReasonComments = table.Column<string>(type: "text", nullable: true),
+                    State = table.Column<bool>(type: "boolean", nullable: false),
+                    UserCreatorId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UserModifierId = table.Column<Guid>(type: "uuid", nullable: false),
+                    DateLastModify = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LeaveRequests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_LeaveRequests_ClientsPositions_ClientPositionId",
+                        column: x => x.ClientPositionId,
+                        principalTable: "ClientsPositions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_ClientPositionManagers_ClientPositionId",
                 table: "ClientPositionManagers",
+                column: "ClientPositionId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ClientsPositions_ClientId",
+                table: "ClientsPositions",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LeaveRequests_ClientPositionId",
+                table: "LeaveRequests",
                 column: "ClientPositionId",
                 unique: true);
         }
@@ -111,13 +134,13 @@ namespace Persistence.Migrations
                 name: "ClientPositionManagers");
 
             migrationBuilder.DropTable(
-                name: "Clients");
-
-            migrationBuilder.DropTable(
                 name: "LeaveRequests");
 
             migrationBuilder.DropTable(
                 name: "ClientsPositions");
+
+            migrationBuilder.DropTable(
+                name: "Clients");
         }
     }
 }

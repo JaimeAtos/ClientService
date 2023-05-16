@@ -9,7 +9,7 @@ namespace Application.Features.LeaveRequest.Commands.UpdateLeaveRquestCommand
     public class UpdateLeaveRquestCommand : IRequest<Response<Guid>>
     {
         public Guid Id { get; set; }
-        public Guid PositionId { get; set; }
+        public Guid ClientPositionId { get; set; }
         public Guid ResourceId { get; set; }
         public Guid ReasonId { get; set; }
         public string? LeaveReasonComments { get; set; }
@@ -36,7 +36,7 @@ namespace Application.Features.LeaveRequest.Commands.UpdateLeaveRquestCommand
             else
             {
                 leaveRequest.Id = request.Id;
-                leaveRequest.PositionId = request.PositionId;
+                leaveRequest.ClientPositionId = request.ClientPositionId;
                 leaveRequest.ResourceId = request.ResourceId;
                 leaveRequest.ReasonId = request.ReasonId;
                 leaveRequest.LeaveReasonComments = request.LeaveReasonComments;
