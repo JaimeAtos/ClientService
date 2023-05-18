@@ -44,10 +44,22 @@ namespace Persistence.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ClientPosition>()
+                .HasOne(e => e.Client)
+                .WithMany(e => e.ClientPositions)
+                .HasForeignKey(e => e.ClientId)
+                .IsRequired();
+            
+            modelBuilder.Entity<ClientPosition>()
             .HasOne<ClientPositionManager>()
             .WithOne()
             .HasForeignKey<ClientPositionManager>(e => e.ClientPositionId)
             .IsRequired();
+            
+            modelBuilder.Entity<ClientPosition>()
+                .HasOne<LeaveRequest>()
+                .WithOne()
+                .HasForeignKey<LeaveRequest>(e => e.ClientPositionId)
+                .IsRequired();
         }
     }
 }

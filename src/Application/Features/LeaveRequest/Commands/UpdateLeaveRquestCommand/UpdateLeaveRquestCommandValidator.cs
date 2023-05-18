@@ -9,7 +9,7 @@ namespace Application.Features.LeaveRequest.Commands.UpdateLeaveRquestCommand
             RuleFor(c => c.Id)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull();
-            RuleFor(c => c.PositionId)
+            RuleFor(c => c.ClientPositionId)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull();
             RuleFor(c => c.ResourceId)

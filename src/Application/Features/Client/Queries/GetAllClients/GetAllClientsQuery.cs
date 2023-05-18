@@ -33,7 +33,7 @@ namespace Application.Features.Client.Queries.GetAllClients
         {
             if (request is null)
             {
-                throw new ArgumentNullException(nameof(request));
+                throw new ArgumentNullException(nameof(request), "Get all request is empty");
             }
 
             return HandleProcess(request, cancellationToken);

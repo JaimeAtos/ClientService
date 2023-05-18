@@ -9,9 +9,9 @@ namespace Application.Features.ClientPosition.Commands.CreateClientPositionComma
     {
         public Guid ClientId { get; set; }
         public Guid PositionId { get; set; }
-        public string PositionDescription { get; set; }
-        public Guid CurrentStateID { get; set; }
-        public string CurrentStateName { get; set; }
+        public string PositionDescription { get; set; } = null!;
+        public Guid CurrentStateId { get; set; }
+        public string CurrentStateName { get; set; } = null!;
     }
 
     public class CreateClientPositionCommandHandler : IRequestHandler<CreateClientPositionCommand, Response<Domain.Entities.ClientPosition>>
@@ -28,7 +28,7 @@ namespace Application.Features.ClientPosition.Commands.CreateClientPositionComma
         {
             if (request == null)
             {
-                throw new Exception();
+                throw new ArgumentNullException(nameof(request), "Create request is empty");
             }
 
             return HandleProcess(request, cancellationToken);

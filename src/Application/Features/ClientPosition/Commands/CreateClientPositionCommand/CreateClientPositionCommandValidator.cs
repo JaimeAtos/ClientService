@@ -16,7 +16,7 @@ namespace Application.Features.ClientPosition.Commands.CreateClientPositionComma
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull()
                 .MaximumLength(80).WithMessage("{PropertyName} must not exceed 80 characters.");
-            RuleFor(c => c.CurrentStateID)
+            RuleFor(c => c.CurrentStateId)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull();
             RuleFor(c => c.CurrentStateName)
