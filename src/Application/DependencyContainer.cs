@@ -4,6 +4,11 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using Application.Consumers.CatalogLocationConsumers;
+using Application.Consumers.CatalogReasonsConsumers;
+using Application.Consumers.CatalogStateConsumers;
+using Application.Consumers.PositionConsumers;
+using Application.Consumers.ResourceConsumers;
 using Atos.Core.Abstractions.Publishers;
 using Atos.Core.Commons.Publishers;
 using Atos.Core.EventsDTO;
@@ -27,25 +32,42 @@ namespace Application
 
 			services.AddMassTransit(cfg =>
 			{
-
-				
+				cfg.AddConsumer<PositionUpdatedConsumer>();
+				cfg.AddConsumer<PositionDeletedConsumer>();
+				cfg.AddConsumer<CatalogLocationUpdatedConsumer>();
+				cfg.AddConsumer<CatalogLocationDeletedConsumer>();
+				cfg.AddConsumer<CatalogStateUpdatedConsumer>();
+				cfg.AddConsumer<CatalogStateDeletedConsumer>();
+				cfg.AddConsumer<CatalogReasonsUpdatedConsumer>();
+				cfg.AddConsumer<CatalogReasonsDeletedConsumer>();
+				cfg.AddConsumer<ResourceUpdatedConsumer>();
+				cfg.AddConsumer<ResourceDeletedConsumer>();
 				
 				cfg.UsingRabbitMq((ctx, cfgrmq) =>
 				{
 					cfgrmq.Host("amqp://guest:guest@localhost:5672");
 					cfgrmq.ReceiveEndpoint("ClientServiceQueue", econfigureEndpoint =>
 					{
+						
 						econfigureEndpoint.ConfigureConsumeTopology = false;
 						econfigureEndpoint.Durable = true;
-						
-						
+						econfigureEndpoint.ConfigureConsumer<PositionUpdatedConsumer>(ctx);
+						econfigureEndpoint.ConfigureConsumer<PositionDeletedConsumer>(ctx);
+						econfigureEndpoint.ConfigureConsumer<CatalogLocationUpdatedConsumer>(ctx);
+						econfigureEndpoint.ConfigureConsumer<CatalogLocationDeletedConsumer>(ctx);
+						econfigureEndpoint.ConfigureConsumer<CatalogStateUpdatedConsumer>(ctx);
+						econfigureEndpoint.ConfigureConsumer<CatalogStateDeletedConsumer>(ctx);
+						econfigureEndpoint.ConfigureConsumer<CatalogReasonsUpdatedConsumer>(ctx);
+						econfigureEndpoint.ConfigureConsumer<CatalogReasonsDeletedConsumer>(ctx);
+						econfigureEndpoint.ConfigureConsumer<ResourceUpdatedConsumer>(ctx);
+						econfigureEndpoint.ConfigureConsumer<ResourceDeletedConsumer>(ctx);
 						
 						econfigureEndpoint.UseMessageRetry(retryConfigure =>
 						{
 							retryConfigure.Interval(5, TimeSpan.FromMilliseconds(1000));
 						});
 
-						econfigureEndpoint.Bind("Atos.Core.EventsDTO:ClientUpdated", d =>
+						econfigureEndpoint.Bind("Atos.Core.EventsDTO:PositionUpdated", d =>
 						{
 							d.ExchangeType = "topic";
 							d.RoutingKey = "position.updated";
@@ -75,15 +97,25 @@ namespace Application
 							d.ExchangeType = "topic";
 							d.RoutingKey = "catalog.state.deleted";
 						});
-						econfigureEndpoint.Bind("Atos.Core.EventsDTO:CatalogStateUpdated", d =>
+						econfigureEndpoint.Bind("Atos.Core.EventsDTO:CatalogReasonsUpdated", d =>
 						{
 							d.ExchangeType = "topic";
 							d.RoutingKey = "catalog.reasons.updated";
 						});
-						econfigureEndpoint.Bind("Atos.Core.EventsDTO:CatalogStateDeleted", d =>
+						econfigureEndpoint.Bind("Atos.Core.EventsDTO:CatalogReasonsDeleted", d =>
 						{
 							d.ExchangeType = "topic";
 							d.RoutingKey = "catalog.reasons.deleted";
+						});
+						econfigureEndpoint.Bind("Atos.Core.EventsDTO:ResourceUpdated", d =>
+						{
+							d.ExchangeType = "topic";
+							d.RoutingKey = "resource.updated";
+						});
+						econfigureEndpoint.Bind("Atos.Core.EventsDTO:ResourceDeleted", d =>
+						{
+							d.ExchangeType = "topic";
+							d.RoutingKey = "resource.deleted";
 						});
 					});
 					
