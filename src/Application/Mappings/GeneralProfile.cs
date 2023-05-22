@@ -1,8 +1,8 @@
 ﻿using Application.DTOs;
-using Application.Features.Client.Commands.CreateClientCommand;
-using Application.Features.ClientPosition.Commands.CreateClientPositionCommand;
-using Application.Features.ClientPositionManager.Commands.CreateClientPositionManager;
-using Application.Features.LeaveRequest.Commands.CreateLeaveRequestCommand;
+using Application.Features.ClientPositions.Commands.CreateClientPositionCommand;
+using Application.Features.ClientPositionsManager.Commands.CreateClientPositionManager;
+using Application.Features.Clients.Commands.CreateClientCommand;
+using Application.Features.LeaveRequests.Commands.CreateLeaveRequestCommand;
 using AutoMapper;
 using Domain.Entities;
 

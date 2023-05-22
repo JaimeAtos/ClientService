@@ -1,9 +1,8 @@
-﻿using Application.Features.Client.Commands.UpdateClientCommnad;
-using Application.Features.ClientPositionManager.Commands.CreateClientPositionManager;
-using Application.Features.ClientPositionManager.Commands.DeleteClientPositionCommand;
-using Application.Features.ClientPositionManager.Commands.UpdateClientPositionManagerCommand;
-using Application.Features.ClientPositionManager.Queries.GetAllClientPositionManagerQuery;
-using Application.Features.ClientPositionManager.Queries.GetClientPositionManagerByIdQuery;
+﻿using Application.Features.ClientPositionsManager.Commands.CreateClientPositionManager;
+using Application.Features.ClientPositionsManager.Commands.DeleteClientPositionManagerCommand;
+using Application.Features.ClientPositionsManager.Commands.UpdateClientPositionManagerCommand;
+using Application.Features.ClientPositionsManager.Queries.GetAllClientPositionManagerQuery;
+using Application.Features.ClientPositionsManager.Queries.GetClientPositionManagerByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
