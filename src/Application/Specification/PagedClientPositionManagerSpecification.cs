@@ -1,4 +1,4 @@
-﻿using Application.Features.ClientPositionManager.Queries.GetAllClientPositionManagerQuery;
+﻿using Application.Features.ClientPositionsManager.Queries.GetAllClientPositionManagerQuery;
 using Ardalis.Specification;
 using Domain.Entities;
 

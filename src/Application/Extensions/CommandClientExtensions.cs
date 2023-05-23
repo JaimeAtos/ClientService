@@ -1,5 +1,5 @@
-using Application.Features.Client.Commands.DeleteClientCommand;
-using Application.Features.Client.Commands.UpdateClientCommnad;
+using Application.Features.Clients.Commands.DeleteClientCommand;
+using Application.Features.Clients.Commands.UpdateClientCommnad;
 using Atos.Core.EventsDTO;
 
 namespace Application.Extensions;

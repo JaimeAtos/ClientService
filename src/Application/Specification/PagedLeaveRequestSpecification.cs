@@ -1,4 +1,4 @@
-﻿using Application.Features.LeaveRequest.Queries.GetAllLeaveRequestQuery;
+﻿using Application.Features.LeaveRequests.Queries.GetAllLeaveRequestQuery;
 using Ardalis.Specification;
 using Domain.Entities;
 

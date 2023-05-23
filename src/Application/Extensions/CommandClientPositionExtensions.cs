@@ -1,5 +1,5 @@
-using Application.Features.ClientPosition.Commands.DeleteClientPositionCommand;
-using Application.Features.ClientPosition.Commands.UpdateClientPositionCommnad;
+using Application.Features.ClientPositions.Commands.DeleteClientPositionCommand;
+using Application.Features.ClientPositions.Commands.UpdateClientPositionCommnad;
 using Atos.Core.EventsDTO;
 
 namespace Application.Extensions;

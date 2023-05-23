@@ -1,4 +1,4 @@
-﻿using Application.Features.Client.Queries.GetAllClients;
+﻿using Application.Features.Clients.Queries.GetAllClients;
 using Ardalis.Specification;
 using Domain.Entities;
 

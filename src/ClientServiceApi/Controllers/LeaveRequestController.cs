@@ -1,8 +1,8 @@
-﻿using Application.Features.LeaveRequest.Commands.CreateLeaveRequestCommand;
-using Application.Features.LeaveRequest.Commands.DeleteLeaveRequestCommand;
-using Application.Features.LeaveRequest.Commands.UpdateLeaveRquestCommand;
-using Application.Features.LeaveRequest.Queries.GetAllLeaveRequestQuery;
-using Application.Features.LeaveRequest.Queries.GetLeaveRequestByIdQuery;
+﻿using Application.Features.LeaveRequests.Commands.CreateLeaveRequestCommand;
+using Application.Features.LeaveRequests.Commands.DeleteLeaveRequestCommand;
+using Application.Features.LeaveRequests.Commands.UpdateLeaveRquestCommand;
+using Application.Features.LeaveRequests.Queries.GetAllLeaveRequestQuery;
+using Application.Features.LeaveRequests.Queries.GetLeaveRequestByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

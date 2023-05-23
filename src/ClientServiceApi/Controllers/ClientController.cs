@@ -1,8 +1,8 @@
-﻿using Application.Features.Client.Commands.CreateClientCommand;
-using Application.Features.Client.Commands.DeleteClientCommand;
-using Application.Features.Client.Commands.UpdateClientCommnad;
-using Application.Features.Client.Queries.GetAllClients;
-using Application.Features.Client.Queries.GetClientById;
+﻿using Application.Features.Clients.Commands.CreateClientCommand;
+using Application.Features.Clients.Commands.DeleteClientCommand;
+using Application.Features.Clients.Commands.UpdateClientCommnad;
+using Application.Features.Clients.Queries.GetAllClients;
+using Application.Features.Clients.Queries.GetClientById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
