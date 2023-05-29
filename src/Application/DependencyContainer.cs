@@ -153,7 +153,7 @@ namespace Application
 			var user = Environment.GetEnvironmentVariable("MQUSER");
 			var pass = Environment.GetEnvironmentVariable("MQPASSWORD");
 			var url = $"amqp://{user}:{pass}@{host}:{port}";
-			return "";
+			return url;
 		}
 	}
 }
