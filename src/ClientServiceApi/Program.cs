@@ -13,7 +13,7 @@ namespace ClientServiceApi
             var configuration = builder.Configuration;
             // Add services to the container.
             builder.Services.AddPersistenceLayer(configuration);
-            builder.Services.AddApplicationLayer(configuration);
+            builder.Services.AddApplicationLayer();
             builder.Services.AddSharedLayer();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

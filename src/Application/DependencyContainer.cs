@@ -18,7 +18,7 @@ namespace Application
 {
 	public static class DependencyContainer
 	{
-		public static void AddApplicationLayer(this IServiceCollection services, IConfiguration configuration)
+		public static void AddApplicationLayer(this IServiceCollection services)
 		{
 			services.AddAutoMapper(Assembly.GetExecutingAssembly());
 			services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
@@ -30,6 +30,11 @@ namespace Application
 			services.AddScoped<IPublisherCommands<ClientPositionUpdated>, PublisherCommands<ClientPositionUpdated>>();
 			services.AddScoped<IPublisherCommands<ClientPositionDeleted>, PublisherCommands<ClientPositionDeleted>>();
 
+			services.AddMassTransitConfig();
+		}
+
+		public static IServiceCollection AddMassTransitConfig(this IServiceCollection services)
+		{
 			services.AddMassTransit(cfg =>
 			{
 				cfg.AddConsumer<PositionUpdatedConsumer>();
@@ -45,7 +50,7 @@ namespace Application
 				
 				cfg.UsingRabbitMq((ctx, cfgrmq) =>
 				{
-					cfgrmq.Host("amqp://guest:guest@localhost:5672");
+					cfgrmq.Host(GetMassTransitUrl());
 					cfgrmq.ReceiveEndpoint("ClientServiceQueue", econfigureEndpoint =>
 					{
 						
@@ -138,6 +143,17 @@ namespace Application
 					
 				});
 			});
+			return services;
+		}
+
+		private static string GetMassTransitUrl()
+		{
+			var host = Environment.GetEnvironmentVariable("MQHOST");
+			var port = Environment.GetEnvironmentVariable("MQPORT");
+			var user = Environment.GetEnvironmentVariable("MQUSER");
+			var pass = Environment.GetEnvironmentVariable("MQPASSWORD");
+			var url = $"amqp://{user}:{pass}@{host}:{port}";
+			return "";
 		}
 	}
 }

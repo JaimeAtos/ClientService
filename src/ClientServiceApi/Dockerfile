@@ -31,6 +31,16 @@ ARG dbhost
 ARG dbport
 ARG dbname
 
+ARG mquser
+ARG mqpass
+ARG mqhost
+ARG mqport
+
+ENV MQPASSWORD=$mqpass
+ENV MQUSER=$mquser
+ENV MQHOST=$mqhost
+ENV MQPORT=$mqport
+
 ENV DBPASSWORD=$dbpass
 ENV DBUSER=$dbuser
 ENV DBHOST=$dbhost
