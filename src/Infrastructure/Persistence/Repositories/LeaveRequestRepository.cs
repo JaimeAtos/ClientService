@@ -1,5 +1,4 @@
-﻿using Ardalis.Specification;
-using Ardalis.Specification.EntityFrameworkCore;
+﻿using Ardalis.Specification.EntityFrameworkCore;
 using Domain.Entities;
 using Domain.Interfaces;
 using Persistence.Context;

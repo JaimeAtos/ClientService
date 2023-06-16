@@ -1,10 +1,10 @@
 ﻿using Application.Exceptions;
 using Application.Extensions;
 using Application.Wrappers;
-using Ardalis.Specification;
 using Atos.Core.Abstractions.Publishers;
 using Atos.Core.EventsDTO;
 using Domain.Entities;
+using Domain.Interfaces;
 using MediatR;
 
 namespace Application.Features.ClientPositions.Commands.DeleteClientPositionCommand
@@ -17,10 +17,10 @@ namespace Application.Features.ClientPositions.Commands.DeleteClientPositionComm
     public class DeleteClientPositionCommandHandler : IRequestHandler<DeleteClientPositionCommand,
         Response<ClientPosition>>
     {
-        private readonly IRepositoryBase<ClientPosition> _repositoryAsync;
+        private readonly IClientPositionRepository _repositoryAsync;
         private readonly IPublisherCommands<ClientPositionDeleted> _publisherCommands;
 
-        public DeleteClientPositionCommandHandler(IRepositoryBase<ClientPosition> repositoryAsync,
+        public DeleteClientPositionCommandHandler(IClientPositionRepository repositoryAsync,
             IPublisherCommands<ClientPositionDeleted> publisherCommands)
         {
             _repositoryAsync = repositoryAsync;

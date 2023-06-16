@@ -1,9 +1,8 @@
 ﻿using Application.DTOs;
 using Application.Specification;
 using Application.Wrappers;
-using Ardalis.Specification;
 using AutoMapper;
-using Domain.Entities;
+using Domain.Interfaces;
 using MediatR;
 
 namespace Application.Features.LeaveRequests.Queries.GetAllLeaveRequestQuery
@@ -19,10 +18,10 @@ namespace Application.Features.LeaveRequests.Queries.GetAllLeaveRequestQuery
 
     public class GetAllLeaveRequestQueryHandler : IRequestHandler<GetAllLeaveRequestQuery, PagedResponse<List<LeaveRequestDTO>>>
     {
-        private readonly IRepositoryBase<LeaveRequest> _repositoryAsync;
+        private readonly ILeaveRequestRepository _repositoryAsync;
         private readonly IMapper _mapper;
 
-        public GetAllLeaveRequestQueryHandler(IRepositoryBase<LeaveRequest> repositoryAsync, IMapper mapper)
+        public GetAllLeaveRequestQueryHandler(ILeaveRequestRepository repositoryAsync, IMapper mapper)
         {
             _repositoryAsync = repositoryAsync;
             _mapper = mapper;

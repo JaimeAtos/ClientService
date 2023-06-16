@@ -1,9 +1,8 @@
 ﻿using Application.DTOs;
 using Application.Exceptions;
 using Application.Wrappers;
-using Ardalis.Specification;
 using AutoMapper;
-using Domain.Entities;
+using Domain.Interfaces;
 using MediatR;
 
 namespace Application.Features.LeaveRequests.Queries.GetLeaveRequestByIdQuery
@@ -15,10 +14,10 @@ namespace Application.Features.LeaveRequests.Queries.GetLeaveRequestByIdQuery
 
     public class GetLeaveRequestByIdQueryHandler : IRequestHandler<GetLeaveRequestByIdQuery, Response<LeaveRequestDTO>>
     {
-        private readonly IRepositoryBase<LeaveRequest> _repositoryAsync;
+        private readonly ILeaveRequestRepository _repositoryAsync;
         private readonly IMapper _mapper;
 
-        public GetLeaveRequestByIdQueryHandler(IRepositoryBase<LeaveRequest> repositoryAsync, IMapper mapper)
+        public GetLeaveRequestByIdQueryHandler(ILeaveRequestRepository repositoryAsync, IMapper mapper)
         {
             _repositoryAsync = repositoryAsync;
             _mapper = mapper;

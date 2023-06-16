@@ -1,7 +1,7 @@
 ﻿using Application.Wrappers;
-using Ardalis.Specification;
 using AutoMapper;
 using Domain.Entities;
+using Domain.Interfaces;
 using MediatR;
 
 namespace Application.Features.Clients.Commands.CreateClientCommand
@@ -17,9 +17,9 @@ namespace Application.Features.Clients.Commands.CreateClientCommand
     public class CreateClientCommandHandler : IRequestHandler<CreateClientCommand, Response<Client>>
     {
         private readonly IMapper _mapper;
-        private readonly IRepositoryBase<Client> _repositoryAsync;
+        private readonly IClientRepository _repositoryAsync;
 
-        public CreateClientCommandHandler(IRepositoryBase<Client> repositoryAsync, IMapper mapper)
+        public CreateClientCommandHandler(IClientRepository repositoryAsync, IMapper mapper)
         {
             _repositoryAsync = repositoryAsync;
             _mapper = mapper;

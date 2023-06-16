@@ -2,7 +2,7 @@
 
 namespace Application.Features.LeaveRequests.Commands.UpdateLeaveRquestCommand
 {
-    internal class UpdateLeaveRquestCommandValidator : AbstractValidator<UpdateLeaveRquestCommand>
+    internal class UpdateLeaveRquestCommandValidator : AbstractValidator<UpdateLeaveRequestCommand>
     {
         public UpdateLeaveRquestCommandValidator()
         {

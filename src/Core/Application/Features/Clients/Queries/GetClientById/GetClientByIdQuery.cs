@@ -1,9 +1,8 @@
 ﻿using Application.DTOs;
 using Application.Exceptions;
 using Application.Wrappers;
-using Ardalis.Specification;
 using AutoMapper;
-using Domain.Entities;
+using Domain.Interfaces;
 using MediatR;
 
 namespace Application.Features.Clients.Queries.GetClientById
@@ -15,10 +14,10 @@ namespace Application.Features.Clients.Queries.GetClientById
 
     public class GetClientByIdQueryHandler : IRequestHandler<GetClientByIdQuery, Response<ClientDTO>>
     {
-        private readonly IRepositoryBase<Client> _repositoryAsync;
+        private readonly IClientRepository _repositoryAsync;
         private readonly IMapper _mapper;
 
-        public GetClientByIdQueryHandler(IRepositoryBase<Client> repositoryAsync, IMapper mapper)
+        public GetClientByIdQueryHandler(IClientRepository repositoryAsync, IMapper mapper)
         {
             _repositoryAsync = repositoryAsync;
             _mapper = mapper;

@@ -1,6 +1,6 @@
 ﻿using Application.Exceptions;
 using Application.Wrappers;
-using Ardalis.Specification;
+using Domain.Interfaces;
 using MediatR;
 
 namespace Application.Features.ClientPositionsManager.Commands.UpdateClientPositionManagerCommand
@@ -16,9 +16,9 @@ namespace Application.Features.ClientPositionsManager.Commands.UpdateClientPosit
     public class
         UpdateClientPositionManagerCommandHandler : IRequestHandler<UpdateClientPositionManagerCommand, Response<Guid>>
     {
-        private readonly IRepositoryBase<Domain.Entities.ClientPositionManager> _repositoryAsync;
+        private readonly IClientPositionManagerRepository _repositoryAsync;
 
-        public UpdateClientPositionManagerCommandHandler(IRepositoryBase<Domain.Entities.ClientPositionManager> repositoryAsync)
+        public UpdateClientPositionManagerCommandHandler(IClientPositionManagerRepository repositoryAsync)
         {
             _repositoryAsync = repositoryAsync;
         }

@@ -13,7 +13,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\..\APIConfigs\APIConfigs\APIConfigs.csproj" />
       <ProjectReference Include="..\..\Core\Application\Application.csproj" />
-      <ProjectReference Include="..\..\Infraestructure\Persistence\Persistence.csproj" />
+      <ProjectReference Include="..\..\Infrastructure\Persistence\Persistence.csproj" />
       <ProjectReference Include="..\..\Presentation\Controllers\Controllers.csproj" />
     </ItemGroup>
 </Project>

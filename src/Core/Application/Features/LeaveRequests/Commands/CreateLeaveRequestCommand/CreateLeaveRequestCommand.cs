@@ -1,7 +1,7 @@
 ﻿using Application.Wrappers;
-using Ardalis.Specification;
 using AutoMapper;
 using Domain.Entities;
+using Domain.Interfaces;
 using MediatR;
 
 namespace Application.Features.LeaveRequests.Commands.CreateLeaveRequestCommand
@@ -17,9 +17,9 @@ namespace Application.Features.LeaveRequests.Commands.CreateLeaveRequestCommand
     public class CreateLeaveRequestHandler : IRequestHandler<CreateLeaveRequestCommand, Response<Guid>>
     {
         private readonly IMapper _mapper;
-        private readonly IRepositoryBase<LeaveRequest> _repositoryAsync;
+        private readonly ILeaveRequestRepository _repositoryAsync;
 
-        public CreateLeaveRequestHandler(IMapper mapper, IRepositoryBase<LeaveRequest> repositoryAsync)
+        public CreateLeaveRequestHandler(IMapper mapper, ILeaveRequestRepository repositoryAsync)
         {
             _mapper = mapper;
             _repositoryAsync = repositoryAsync;

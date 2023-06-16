@@ -1,10 +1,10 @@
 ﻿using Application.Exceptions;
 using Application.Extensions;
 using Application.Wrappers;
-using Ardalis.Specification;
 using Atos.Core.Abstractions.Publishers;
 using Atos.Core.EventsDTO;
 using Domain.Entities;
+using Domain.Interfaces;
 using MediatR;
 
 namespace Application.Features.ClientPositions.Commands.UpdateClientPositionCommnad
@@ -22,10 +22,10 @@ namespace Application.Features.ClientPositions.Commands.UpdateClientPositionComm
     public class
         UpdateClientPositionCommnadHandler : IRequestHandler<UpdateClientPositionCommnad, Response<ClientPosition>>
     {
-        private readonly IRepositoryBase<ClientPosition> _repositoryAsync;
+        private readonly IClientPositionRepository _repositoryAsync;
         private readonly IPublisherCommands<ClientPositionUpdated> _publisherCommands;
 
-        public UpdateClientPositionCommnadHandler(IRepositoryBase<ClientPosition> repositoryAsync,
+        public UpdateClientPositionCommnadHandler(IClientPositionRepository repositoryAsync,
             IPublisherCommands<ClientPositionUpdated> publisherCommands)
         {
             _repositoryAsync = repositoryAsync;

@@ -1,5 +1,4 @@
 ﻿using Atos.Core.EventsDTO;
-using Domain.Entities;
 using Domain.Interfaces;
 using MassTransit;
 

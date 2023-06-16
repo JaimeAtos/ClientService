@@ -34,7 +34,7 @@ namespace Controllers.Controllers
         }
 
         [HttpPut("/UpdateLeaveRequest")]
-        public async Task<IActionResult> UpdateLeaveRequest([FromBody] UpdateLeaveRquestCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> UpdateLeaveRequest([FromBody] UpdateLeaveRequestCommand command, CancellationToken cancellationToken)
         {
             await _mediator.Send(command, cancellationToken);
             return NoContent();

@@ -1,6 +1,4 @@
-﻿using Ardalis.Specification;
-using Atos.Core.EventsDTO;
-using Domain.Entities;
+﻿using Atos.Core.EventsDTO;
 using Domain.Interfaces;
 using MassTransit;
 

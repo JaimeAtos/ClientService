@@ -1,7 +1,7 @@
 ﻿using Application.Wrappers;
-using Ardalis.Specification;
 using AutoMapper;
 using Domain.Entities;
+using Domain.Interfaces;
 using MediatR;
 
 namespace Application.Features.ClientPositionsManager.Commands.CreateClientPositionManager
@@ -17,10 +17,10 @@ namespace Application.Features.ClientPositionsManager.Commands.CreateClientPosit
         CreateClientPositionManagerHandler : IRequestHandler<CreateClientPositionManagerCommand, Response<Guid>>
     {
         private readonly IMapper _mapper;
-        private readonly IRepositoryBase<ClientPositionManager> _repositoryAsync;
+        private readonly IClientPositionManagerRepository _repositoryAsync;
 
         public CreateClientPositionManagerHandler(IMapper mapper,
-            IRepositoryBase<ClientPositionManager> repositoryAsync)
+            IClientPositionManagerRepository repositoryAsync)
         {
             _mapper = mapper;
             _repositoryAsync = repositoryAsync;

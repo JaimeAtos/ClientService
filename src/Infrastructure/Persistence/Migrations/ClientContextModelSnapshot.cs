@@ -29,7 +29,7 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<int>("CountPositions")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -42,11 +42,11 @@ namespace Persistence.Migrations
 
                     b.Property<string>("LocationName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(150)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(120)");
 
                     b.Property<bool>("State")
                         .HasColumnType("boolean");
@@ -59,7 +59,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clients");
+                    b.ToTable("Client");
                 });
 
             modelBuilder.Entity("Domain.Entities.ClientPosition", b =>
@@ -79,14 +79,14 @@ namespace Persistence.Migrations
 
                     b.Property<string>("CurrentStateName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(40)");
 
                     b.Property<DateTime?>("DateLastModify")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("PositionDescription")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(120)");
 
                     b.Property<Guid>("PositionId")
                         .HasColumnType("uuid");
@@ -104,7 +104,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("ClientsPositions");
+                    b.ToTable("ClientsPosition");
                 });
 
             modelBuilder.Entity("Domain.Entities.ClientPositionManager", b =>
@@ -124,7 +124,7 @@ namespace Persistence.Migrations
 
                     b.Property<string>("Resource")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(80)");
 
                     b.Property<Guid>("ResourceId")
                         .HasColumnType("uuid");
@@ -140,10 +140,9 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientPositionId")
-                        .IsUnique();
+                    b.HasIndex("ClientPositionId");
 
-                    b.ToTable("ClientPositionManagers");
+                    b.ToTable("ClientPositionManager");
                 });
 
             modelBuilder.Entity("Domain.Entities.LeaveRequest", b =>
@@ -162,7 +161,8 @@ namespace Persistence.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("LeaveReasonComments")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasColumnType("varchar(500)");
 
                     b.Property<Guid>("ReasonId")
                         .HasColumnType("uuid");
@@ -181,10 +181,9 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientPositionId")
-                        .IsUnique();
+                    b.HasIndex("ClientPositionId");
 
-                    b.ToTable("LeaveRequests");
+                    b.ToTable("LeaveRequest");
                 });
 
             modelBuilder.Entity("Domain.Entities.ClientPosition", b =>
@@ -200,25 +199,36 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.ClientPositionManager", b =>
                 {
-                    b.HasOne("Domain.Entities.ClientPosition", null)
-                        .WithOne()
-                        .HasForeignKey("Domain.Entities.ClientPositionManager", "ClientPositionId")
+                    b.HasOne("Domain.Entities.ClientPosition", "ClientPosition")
+                        .WithMany("ClientPositionManager")
+                        .HasForeignKey("ClientPositionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ClientPosition");
                 });
 
             modelBuilder.Entity("Domain.Entities.LeaveRequest", b =>
                 {
-                    b.HasOne("Domain.Entities.ClientPosition", null)
-                        .WithOne()
-                        .HasForeignKey("Domain.Entities.LeaveRequest", "ClientPositionId")
+                    b.HasOne("Domain.Entities.ClientPosition", "ClientPosition")
+                        .WithMany("LeaveRequests")
+                        .HasForeignKey("ClientPositionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ClientPosition");
                 });
 
             modelBuilder.Entity("Domain.Entities.Client", b =>
                 {
                     b.Navigation("ClientPositions");
+                });
+
+            modelBuilder.Entity("Domain.Entities.ClientPosition", b =>
+                {
+                    b.Navigation("ClientPositionManager");
+
+                    b.Navigation("LeaveRequests");
                 });
 #pragma warning restore 612, 618
         }

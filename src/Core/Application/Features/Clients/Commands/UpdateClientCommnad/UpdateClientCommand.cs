@@ -1,10 +1,10 @@
 ﻿using Application.Exceptions;
 using Application.Extensions;
 using Application.Wrappers;
-using Ardalis.Specification;
 using Atos.Core.Abstractions.Publishers;
 using Atos.Core.EventsDTO;
 using Domain.Entities;
+using Domain.Interfaces;
 using MediatR;
 
 namespace Application.Features.Clients.Commands.UpdateClientCommnad
@@ -20,10 +20,10 @@ namespace Application.Features.Clients.Commands.UpdateClientCommnad
 
     public class UpdateClientCommandHandler : IRequestHandler<UpdateClientCommand, Response<Client>>
     {
-        private readonly IRepositoryBase<Client> _repositoryAsync;
+        private readonly IClientRepository _repositoryAsync;
         private readonly IPublisherCommands<ClientUpdated> _publisherCommands;
 
-        public UpdateClientCommandHandler(IRepositoryBase<Client> repositoryAsync,
+        public UpdateClientCommandHandler(IClientRepository repositoryAsync,
             IPublisherCommands<ClientUpdated> publisherCommands)
         {
             _repositoryAsync = repositoryAsync;

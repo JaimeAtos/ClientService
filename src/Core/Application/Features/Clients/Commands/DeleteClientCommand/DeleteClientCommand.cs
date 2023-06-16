@@ -1,10 +1,10 @@
 ﻿using Application.Exceptions;
 using Application.Extensions;
 using Application.Wrappers;
-using Ardalis.Specification;
 using Atos.Core.Abstractions.Publishers;
 using Atos.Core.EventsDTO;
 using Domain.Entities;
+using Domain.Interfaces;
 using MediatR;
 
 namespace Application.Features.Clients.Commands.DeleteClientCommand
@@ -16,10 +16,10 @@ namespace Application.Features.Clients.Commands.DeleteClientCommand
 
     public class DeleteClientCommandHandler : IRequestHandler<DeleteClientCommand, Response<Client>>
     {
-        private readonly IRepositoryBase<Client> _repositoryAsync;
+        private readonly IClientRepository _repositoryAsync;
         private readonly IPublisherCommands<ClientDeleted> _publisherCommands;
 
-        public DeleteClientCommandHandler(IRepositoryBase<Client> repositoryAsync,
+        public DeleteClientCommandHandler(IClientRepository repositoryAsync,
             IPublisherCommands<ClientDeleted> publisherCommands)
         {
             _repositoryAsync = repositoryAsync;

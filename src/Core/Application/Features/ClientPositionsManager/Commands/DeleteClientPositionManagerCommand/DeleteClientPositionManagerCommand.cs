@@ -1,7 +1,6 @@
 ﻿using Application.Exceptions;
 using Application.Wrappers;
-using Ardalis.Specification;
-using Domain.Entities;
+using Domain.Interfaces;
 using MediatR;
 
 namespace Application.Features.ClientPositionsManager.Commands.DeleteClientPositionManagerCommand
@@ -15,9 +14,9 @@ namespace Application.Features.ClientPositionsManager.Commands.DeleteClientPosit
     public class
         DeleteClientPositionManagerCommandHandler : IRequestHandler<DeleteClientPositionManagerCommand, Response<Guid>>
     {
-        private readonly IRepositoryBase<ClientPositionManager> _repositoryAsync;
+        private readonly IClientPositionManagerRepository _repositoryAsync;
 
-        public DeleteClientPositionManagerCommandHandler(IRepositoryBase<ClientPositionManager> repositoryAsync)
+        public DeleteClientPositionManagerCommandHandler(IClientPositionManagerRepository repositoryAsync)
         {
             _repositoryAsync = repositoryAsync;
         }

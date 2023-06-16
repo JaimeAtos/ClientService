@@ -1,8 +1,8 @@
 ﻿using Application.DTOs;
 using Application.Specification;
 using Application.Wrappers;
-using Ardalis.Specification;
 using AutoMapper;
+using Domain.Interfaces;
 using MediatR;
 
 namespace Application.Features.ClientPositionsManager.Queries.GetAllClientPositionManagerQuery
@@ -17,10 +17,10 @@ namespace Application.Features.ClientPositionsManager.Queries.GetAllClientPositi
 
     public class GetAllClientPositionManagerHandler : IRequestHandler<GetAllClientPositionManagerQuery, PagedResponse<List<ClientPositionManagerDTO>>>
     {
-        private readonly IRepositoryBase<Domain.Entities.ClientPositionManager> _repositoryAsync;
+        private readonly IClientPositionManagerRepository _repositoryAsync;
         private readonly IMapper _mapper;
 
-        public GetAllClientPositionManagerHandler(IRepositoryBase<Domain.Entities.ClientPositionManager> repositoryAsync, IMapper mapper)
+        public GetAllClientPositionManagerHandler(IClientPositionManagerRepository repositoryAsync, IMapper mapper)
         {
             _repositoryAsync = repositoryAsync;
             _mapper = mapper;

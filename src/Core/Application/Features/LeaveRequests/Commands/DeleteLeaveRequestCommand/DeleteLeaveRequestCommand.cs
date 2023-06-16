@@ -1,7 +1,6 @@
 ﻿using Application.Exceptions;
 using Application.Wrappers;
-using Ardalis.Specification;
-using Domain.Entities;
+using Domain.Interfaces;
 using MediatR;
 
 namespace Application.Features.LeaveRequests.Commands.DeleteLeaveRequestCommand
@@ -13,9 +12,9 @@ namespace Application.Features.LeaveRequests.Commands.DeleteLeaveRequestCommand
 
     public class DeleteLeaveRequestCommandHandler : IRequestHandler<DeleteLeaveRequestCommand, Response<Guid>>
     {
-        private readonly IRepositoryBase<LeaveRequest> _repositoryAsync;
+        private readonly ILeaveRequestRepository _repositoryAsync;
 
-        public DeleteLeaveRequestCommandHandler(IRepositoryBase<LeaveRequest> repositoryAsync)
+        public DeleteLeaveRequestCommandHandler(ILeaveRequestRepository repositoryAsync)
         {
             _repositoryAsync = repositoryAsync;
         }
