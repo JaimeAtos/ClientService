@@ -12,13 +12,13 @@ COPY ["ClientService", "ClientService/"]
 COPY ["Atos.Core", "Atos.Core/"]
 COPY ["APIConfigs", "APIConfigs/"]
 
-RUN dotnet restore "ClientService/src/ClientServiceApi/ClientServiceApi.csproj"
+RUN dotnet restore "ClientService/src/Presentation/ClientServiceApi/ClientServiceApi.csproj"
 
 COPY ClientService/ .
 COPY Atos.Core/ .
 COPY APIConfigs/ .
 
-WORKDIR "/src/ClientService/src/ClientServiceApi"
+WORKDIR "/src/ClientService/src/Presentation/ClientServiceApi"
 
 RUN dotnet build "ClientServiceApi.csproj" -c Release -o /app/build
 
