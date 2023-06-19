@@ -1,4 +1,5 @@
 ﻿using APIConfigs;
+using APIConfigs.Policies;
 using Application;
 using Controllers;
 using Controllers.Middlewares;
@@ -16,13 +17,14 @@ public static class DependencyContainer
             .AddPersistenceLayer()
             .AddApplicationLayer()
             .AddMassTransitConfig()
-            .AddControllersAndApiVersioning()
-            .AddMicroservicesCors();
+			.AddMicroservicesCors()
+            .AddControllersAndApiVersioning();
     }
     
     public static void UseErrorHandlingMiddleware(this IApplicationBuilder app)
     {
         app.UseMiddleware<ErrorHandlingMiddleware>();
+		app.UseCors(ConsumePolicy.FrontPolicy.ToString());
     }
-    
 }
+
