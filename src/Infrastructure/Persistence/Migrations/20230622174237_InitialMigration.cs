@@ -12,14 +12,14 @@ namespace Persistence.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Clients",
+                name: "Client",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "varchar(120)", nullable: false),
                     LocationId = table.Column<Guid>(type: "uuid", nullable: false),
-                    LocationName = table.Column<string>(type: "text", nullable: false),
-                    CountPositions = table.Column<int>(type: "integer", nullable: false),
+                    LocationName = table.Column<string>(type: "varchar(150)", nullable: false),
+                    CountPositions = table.Column<int>(type: "int", nullable: false),
                     State = table.Column<bool>(type: "boolean", nullable: false),
                     UserCreatorId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -28,19 +28,19 @@ namespace Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clients", x => x.Id);
+                    table.PrimaryKey("PK_Client", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ClientsPositions",
+                name: "ClientsPosition",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     ClientId = table.Column<Guid>(type: "uuid", nullable: false),
                     PositionId = table.Column<Guid>(type: "uuid", nullable: false),
-                    PositionDescription = table.Column<string>(type: "text", nullable: false),
+                    PositionDescription = table.Column<string>(type: "varchar(120)", nullable: false),
                     CurrentStateId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CurrentStateName = table.Column<string>(type: "text", nullable: false),
+                    CurrentStateName = table.Column<string>(type: "varchar(40)", nullable: false),
                     State = table.Column<bool>(type: "boolean", nullable: false),
                     UserCreatorId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -49,23 +49,23 @@ namespace Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ClientsPositions", x => x.Id);
+                    table.PrimaryKey("PK_ClientsPosition", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientsPositions_Clients_ClientId",
+                        name: "FK_ClientsPosition_Client_ClientId",
                         column: x => x.ClientId,
-                        principalTable: "Clients",
+                        principalTable: "Client",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ClientPositionManagers",
+                name: "ClientPositionManager",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     ClientPositionId = table.Column<Guid>(type: "uuid", nullable: false),
                     ResourceId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Resource = table.Column<string>(type: "text", nullable: false),
+                    Resource = table.Column<string>(type: "varchar(80)", nullable: false),
                     State = table.Column<bool>(type: "boolean", nullable: false),
                     UserCreatorId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -74,24 +74,24 @@ namespace Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ClientPositionManagers", x => x.Id);
+                    table.PrimaryKey("PK_ClientPositionManager", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientPositionManagers_ClientsPositions_ClientPositionId",
+                        name: "FK_ClientPositionManager_ClientsPosition_ClientPositionId",
                         column: x => x.ClientPositionId,
-                        principalTable: "ClientsPositions",
+                        principalTable: "ClientsPosition",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "LeaveRequests",
+                name: "LeaveRequest",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     ClientPositionId = table.Column<Guid>(type: "uuid", nullable: false),
                     ResourceId = table.Column<Guid>(type: "uuid", nullable: false),
                     ReasonId = table.Column<Guid>(type: "uuid", nullable: false),
-                    LeaveReasonComments = table.Column<string>(type: "text", nullable: true),
+                    LeaveReasonComments = table.Column<string>(type: "varchar(500)", nullable: false),
                     State = table.Column<bool>(type: "boolean", nullable: false),
                     UserCreatorId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -100,47 +100,45 @@ namespace Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LeaveRequests", x => x.Id);
+                    table.PrimaryKey("PK_LeaveRequest", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_LeaveRequests_ClientsPositions_ClientPositionId",
+                        name: "FK_LeaveRequest_ClientsPosition_ClientPositionId",
                         column: x => x.ClientPositionId,
-                        principalTable: "ClientsPositions",
+                        principalTable: "ClientsPosition",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClientPositionManagers_ClientPositionId",
-                table: "ClientPositionManagers",
-                column: "ClientPositionId",
-                unique: true);
+                name: "IX_ClientPositionManager_ClientPositionId",
+                table: "ClientPositionManager",
+                column: "ClientPositionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ClientsPositions_ClientId",
-                table: "ClientsPositions",
+                name: "IX_ClientsPosition_ClientId",
+                table: "ClientsPosition",
                 column: "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_LeaveRequests_ClientPositionId",
-                table: "LeaveRequests",
-                column: "ClientPositionId",
-                unique: true);
+                name: "IX_LeaveRequest_ClientPositionId",
+                table: "LeaveRequest",
+                column: "ClientPositionId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ClientPositionManagers");
+                name: "ClientPositionManager");
 
             migrationBuilder.DropTable(
-                name: "LeaveRequests");
+                name: "LeaveRequest");
 
             migrationBuilder.DropTable(
-                name: "ClientsPositions");
+                name: "ClientsPosition");
 
             migrationBuilder.DropTable(
-                name: "Clients");
+                name: "Client");
         }
     }
 }
