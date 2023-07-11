@@ -16,10 +16,6 @@ namespace Application.Features.Clients.Commands.UpdateClientCommnad
             RuleFor(c => c.LocationId)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull();
-            RuleFor(c => c.CountPositions)
-                .NotEmpty().WithMessage("{PropertyName} is required.")
-                .NotNull()
-                .GreaterThan(0).WithMessage("{PropertyName} must be greater than 0.");
         }
     }
 }

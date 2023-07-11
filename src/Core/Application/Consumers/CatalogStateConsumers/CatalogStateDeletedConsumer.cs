@@ -18,7 +18,7 @@ public class CatalogStateDeletedConsumer : IConsumer<CatalogStateDeleted>
         var message = context.Message;
         var catalogState = await _repository.ListAsync();
 
-        foreach (var states in catalogState.Where(s => s.PositionId == message.Id))
+        foreach (var states in catalogState.Where(s => s.CurrentStateId == message.Id))
         {
             states.State = false;
             await _repository.UpdateAsync(states);
