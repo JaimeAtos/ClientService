@@ -12,6 +12,7 @@ namespace Application.Features.Clients.Queries.GetAllClients
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
+        public Guid? Id { get; set; }
         public string? Name { get; set; }
         public Guid? LocationId { get; set; }
         public string? LocationName { get; set; }
@@ -44,6 +45,7 @@ namespace Application.Features.Clients.Queries.GetAllClients
             var pagination = new PagedClientSpecification(request);
             var clients = await _repositoryAsync.ListAsync(pagination, cancellationToken);
             var clientsDto = _mapper.Map<List<ClientDTO>>(clients);
+
             return new PagedResponse<List<ClientDTO>>(clientsDto, request.PageNumber, request.PageSize);
         }
     }

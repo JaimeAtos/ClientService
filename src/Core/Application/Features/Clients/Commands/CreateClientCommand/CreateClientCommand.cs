@@ -11,7 +11,6 @@ namespace Application.Features.Clients.Commands.CreateClientCommand
         public string Name { get; set; } = null!;
         public Guid LocationId { get; set; }
         public string LocationName { get; set; } = null!;
-        public int CountPositions { get; set; }
     }
 
     public class CreateClientCommandHandler : IRequestHandler<CreateClientCommand, Response<Client>>

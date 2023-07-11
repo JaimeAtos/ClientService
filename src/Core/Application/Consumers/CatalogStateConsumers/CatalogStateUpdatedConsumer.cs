@@ -20,7 +20,7 @@ public class CatalogStateUpdatedConsumer : IConsumer<CatalogStateUpdated>
         var message = context.Message;
         var catalogState = await _repository.ListAsync();
 
-        foreach (var states in catalogState.Where(s => s.PositionId == message.Id))
+        foreach (var states in catalogState.Where(s => s.CurrentStateId == message.Id))
         {
             states.CurrentStateName = message.Description;
             await _repository.UpdateAsync(states);
