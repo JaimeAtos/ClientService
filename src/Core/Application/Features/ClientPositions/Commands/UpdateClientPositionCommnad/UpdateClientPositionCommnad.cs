@@ -15,7 +15,7 @@ namespace Application.Features.ClientPositions.Commands.UpdateClientPositionComm
         public Guid ClientId { get; set; }
         public Guid PositionId { get; set; }
         public string PositionDescription { get; set; } = null!;
-        public Guid CurrentStateId { get; set; }
+        public int CurrentStateId { get; set; }
         public string CurrentStateName { get; set; } = null!;
     }
 
