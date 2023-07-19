@@ -39,7 +39,7 @@ namespace Persistence.Migrations
                     ClientId = table.Column<Guid>(type: "uuid", nullable: false),
                     PositionId = table.Column<Guid>(type: "uuid", nullable: false),
                     PositionDescription = table.Column<string>(type: "varchar(120)", nullable: false),
-                    CurrentStateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CurrentStateId = table.Column<int>(type: "integer", nullable: false),
                     CurrentStateName = table.Column<string>(type: "varchar(40)", nullable: false),
                     State = table.Column<bool>(type: "boolean", nullable: false),
                     UserCreatorId = table.Column<Guid>(type: "uuid", nullable: false),

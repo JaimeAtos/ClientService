@@ -12,7 +12,7 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ClientContext))]
-    [Migration("20230622174237_InitialMigration")]
+    [Migration("20230719180610_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -77,8 +77,8 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("CurrentStateId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("CurrentStateId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("CurrentStateName")
                         .IsRequired()

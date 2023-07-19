@@ -74,8 +74,8 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("CurrentStateId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("CurrentStateId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("CurrentStateName")
                         .IsRequired()
