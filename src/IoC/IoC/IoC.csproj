@@ -8,10 +8,10 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+      <PackageReference Include="TalentManagement.Microservices.APIConfigs" Version="1.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\..\APIConfigs\APIConfigs\APIConfigs.csproj" />
       <ProjectReference Include="..\..\Core\Application\Application.csproj" />
       <ProjectReference Include="..\..\Infrastructure\Persistence\Persistence.csproj" />
       <ProjectReference Include="..\..\Presentation\Controllers\Controllers.csproj" />
