@@ -1,4 +1,4 @@
-name: Build Prescreening Docker Image
+name: Build ClientService Docker Image
 
 on:
   workflow_dispatch:
