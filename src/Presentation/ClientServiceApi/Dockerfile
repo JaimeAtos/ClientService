@@ -1,24 +1,23 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /src
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS auth
 
-COPY ["ClientService", "ClientService/"]
-COPY ["Atos.Core", "Atos.Core/"]
-COPY ["APIConfigs", "APIConfigs/"]
+ARG gituser
+ARG gitpass
 
-RUN dotnet restore "ClientService/src/Presentation/ClientServiceApi/ClientServiceApi.csproj"
+RUN dotnet nuget add source --username $gituser --password $gitpass --store-password-in-clear-text --name github "https://nuget.pkg.github.com/Talent-management/index.json"
 
-COPY ClientService/ .
-COPY Atos.Core/ .
-COPY APIConfigs/ .
+FROM auth AS build
+WORKDIR /clientservice
 
-WORKDIR "/src/ClientService/src/Presentation/ClientServiceApi"
+COPY ["src", "src/"]
+
+RUN dotnet restore "src/Presentation/ClientServiceApi/ClientServiceApi.csproj"
+
+WORKDIR /clientservice/src/Presentation/ClientServiceApi
 
 RUN dotnet build "ClientServiceApi.csproj" -c Release -o /app/build
 
