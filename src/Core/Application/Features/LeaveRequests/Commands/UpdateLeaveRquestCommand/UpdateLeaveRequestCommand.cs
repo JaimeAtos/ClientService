@@ -1,5 +1,6 @@
 ﻿using Application.Exceptions;
 using Application.Wrappers;
+using AutoMapper;
 using Domain.Interfaces;
 using MediatR;
 
@@ -14,13 +15,15 @@ namespace Application.Features.LeaveRequests.Commands.UpdateLeaveRquestCommand
         public string LeaveReasonComments { get; set; } = null!;
     }
 
-    public class UpdateLeaveRquestCommandHandler : IRequestHandler<UpdateLeaveRequestCommand, Response<Guid>>
+    public class UpdateLeaveRequestCommandHandler : IRequestHandler<UpdateLeaveRequestCommand, Response<Guid>>
     {
         private readonly ILeaveRequestRepository _repositoryAsync;
+        private readonly IMapper _mapper;
 
-        public UpdateLeaveRquestCommandHandler(ILeaveRequestRepository repositoryAsync)
+        public UpdateLeaveRequestCommandHandler(ILeaveRequestRepository repositoryAsync, IMapper mapper)
         {
             _repositoryAsync = repositoryAsync;
+            _mapper = mapper;
         }
 
         public Task<Response<Guid>> Handle(UpdateLeaveRequestCommand request, CancellationToken cancellationToken)
@@ -33,12 +36,8 @@ namespace Application.Features.LeaveRequests.Commands.UpdateLeaveRquestCommand
         {
             var leaveRequest = await _repositoryAsync.GetByIdAsync(request.Id, cancellationToken);
             if (leaveRequest == null) throw new ApiExceptions($"register {request.Id} Not Found");
-            
-            leaveRequest.Id = request.Id;
-            leaveRequest.ClientPositionId = request.ClientPositionId;
-            leaveRequest.ResourceId = request.ResourceId;
-            leaveRequest.ReasonId = request.ReasonId;
-            leaveRequest.LeaveReasonComments = request.LeaveReasonComments;
+
+            leaveRequest = _mapper.Map(request, leaveRequest);
 
             await _repositoryAsync.UpdateAsync(leaveRequest, cancellationToken);
             return new Response<Guid>(leaveRequest.Id);

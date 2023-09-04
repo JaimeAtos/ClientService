@@ -8,41 +8,39 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Controllers.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ClientController : ControllerBase
+    [ApiVersion("1.0")]
+    public class ClientController : BaseApiController
     {
-        private readonly IMediator _mediator;
-        public ClientController(IMediator mediator)
+        public ClientController(IMediator mediator) : base(mediator)
         {
-            _mediator = mediator;
+            
         }
        
-        [HttpPost("/CreateClient")]
+        [HttpPost]
         public async Task<IActionResult> CreateClient([FromBody] CreateClientCommand createClientCommand)
         {
-            var response = await _mediator.Send(createClientCommand);
+            var response = await Mediator.Send(createClientCommand);
             return CreatedAtRoute("GetClientById", new { id = response.Data.Id }, createClientCommand);
         }
 
-        [HttpDelete("/DeleteClient")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteClient([FromBody] DeleteClientCommand deleteClientCommand, CancellationToken cancellationToken)
         {
-            await _mediator.Send(deleteClientCommand, cancellationToken);
+            await Mediator.Send(deleteClientCommand, cancellationToken);
             return NoContent();
         }
         
-        [HttpPut("/UpdateClient")]
+        [HttpPut]
         public async Task<IActionResult> UpdateClient([FromBody] UpdateClientCommand updateClientCommand, CancellationToken cancellationToken)
         {
-            await _mediator.Send(updateClientCommand, cancellationToken);
+            await Mediator.Send(updateClientCommand, cancellationToken);
             return NoContent();
         }
         
-        [HttpGet("/GetAllClients")]
+        [HttpGet]
         public async Task<IActionResult> GetAllClients([FromQuery]GetAllClientsParameters filters)
         {
-            return Ok(await _mediator.Send(new GetAllClientsQuery() 
+            return Ok(await Mediator.Send(new GetAllClientsQuery() 
             {
                 PageNumber = filters.PageNumber, 
                 PageSize = filters.PageSize,
@@ -54,10 +52,10 @@ namespace Controllers.Controllers
             }));
         }
 
-        [HttpGet("/GetClientById/{id}",Name = "GetClientById")]
+        [HttpGet("{id}",Name = "GetClientById")]
         public async Task<IActionResult> GetClientById(Guid id)
         {
-            var response = await _mediator.Send(new GetClientByIdQuery() { Id = id});
+            var response = await Mediator.Send(new GetClientByIdQuery() { Id = id});
             return Ok(response);
         }
         

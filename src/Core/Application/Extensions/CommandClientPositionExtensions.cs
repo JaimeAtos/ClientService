@@ -6,7 +6,7 @@ namespace Application.Extensions;
 
 public static class CommandClientPositionExtensions
 {
-    public static ClientPositionUpdated ToClientPositionUpdated(this UpdateClientPositionCommnad request)
+    public static ClientPositionUpdated ToClientPositionUpdated(this UpdateClientPositionCommand request)
     {
         return new ClientPositionUpdated
         {
