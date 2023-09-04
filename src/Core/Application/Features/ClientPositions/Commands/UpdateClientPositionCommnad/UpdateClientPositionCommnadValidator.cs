@@ -2,7 +2,7 @@
 
 namespace Application.Features.ClientPositions.Commands.UpdateClientPositionCommnad
 {
-    public class UpdateClientPositionCommnadValidator : AbstractValidator<UpdateClientPositionCommnad>
+    public class UpdateClientPositionCommnadValidator : AbstractValidator<UpdateClientPositionCommand>
     {
         public UpdateClientPositionCommnadValidator()
         {

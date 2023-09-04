@@ -8,43 +8,43 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Controllers.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ClientPositionController : ControllerBase
+    [ApiVersion("1.0")]
+    public class ClientPositionController : BaseApiController
     {
-        private readonly IMediator _mediator;
-        public ClientPositionController(IMediator mediator)
+        public ClientPositionController(IMediator mediator) : base(mediator)
         {
-            _mediator = mediator;
         }
 
-        [HttpPost("/CreateClientPosition")]
-        public async Task<IActionResult> CreateClientPosition([FromBody] CreateClientPositionCommand createClientPositionCommand)
+        [HttpPost]
+        public async Task<IActionResult> CreateClientPosition(
+            [FromBody] CreateClientPositionCommand createClientPositionCommand)
         {
-            var response = await _mediator.Send(createClientPositionCommand);
-            return CreatedAtRoute("GetClientPositionById", new { id = response.Data.Id}, createClientPositionCommand);
+            var response = await Mediator.Send(createClientPositionCommand);
+            return CreatedAtRoute("GetClientPositionById", new { id = response.Data.Id }, createClientPositionCommand);
         }
 
-        [HttpDelete("/DeleteClientPosition")]
-        public async Task<IActionResult> DeleteClientPosition([FromBody] DeleteClientPositionCommand deleteClientPositionCommand)
+        [HttpDelete]
+        public async Task<IActionResult> DeleteClientPosition(
+            [FromBody] DeleteClientPositionCommand deleteClientPositionCommand)
         {
-            await _mediator.Send(deleteClientPositionCommand);
+            await Mediator.Send(deleteClientPositionCommand);
             return NoContent();
         }
 
-        [HttpPut("/UpdateClientPosition")]
-        public async Task<IActionResult> UpdateClientPosition([FromBody] UpdateClientPositionCommnad updateClientPositionCommand)
+        [HttpPut]
+        public async Task<IActionResult> UpdateClientPosition(
+            [FromBody] UpdateClientPositionCommand updateClientPositionCommand)
         {
-            await _mediator.Send(updateClientPositionCommand);
+            await Mediator.Send(updateClientPositionCommand);
             return NoContent();
         }
 
-        [HttpGet("/GetAllClientPositions")]
-        public async Task<IActionResult> GetAllClientPositions([FromQuery]GetAllClientPositionsParameters filters)
+        [HttpGet]
+        public async Task<IActionResult> GetAllClientPositions([FromQuery] GetAllClientPositionsParameters filters)
         {
-            return Ok(await _mediator.Send(new GetAllClientPositionsQuery() 
+            return Ok(await Mediator.Send(new GetAllClientPositionsQuery()
             {
-                PageNumber = filters.PageNumber, 
+                PageNumber = filters.PageNumber,
                 PageSize = filters.PageSize,
                 PositionDescription = filters.PositionDescription,
                 CurrentStateName = filters.CurrentStateName,
@@ -52,10 +52,10 @@ namespace Controllers.Controllers
             }));
         }
 
-        [HttpGet("/GetClientPositionById/{id}", Name = "GetClientPositionById")]
+        [HttpGet("{id}", Name = "GetClientPositionById")]
         public async Task<IActionResult> GetClientPositionById(Guid id)
         {
-            var response = await _mediator.Send(new GetClientPositionByIdQuery() { Id = id});
+            var response = await Mediator.Send(new GetClientPositionByIdQuery() { Id = id });
             return Ok(response);
         }
     }

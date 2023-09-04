@@ -1,5 +1,6 @@
 ﻿using Application.Exceptions;
 using Application.Wrappers;
+using AutoMapper;
 using Domain.Interfaces;
 using MediatR;
 
@@ -17,10 +18,12 @@ namespace Application.Features.ClientPositionsManager.Commands.UpdateClientPosit
         UpdateClientPositionManagerCommandHandler : IRequestHandler<UpdateClientPositionManagerCommand, Response<Guid>>
     {
         private readonly IClientPositionManagerRepository _repositoryAsync;
+        private readonly IMapper _mapper;
 
-        public UpdateClientPositionManagerCommandHandler(IClientPositionManagerRepository repositoryAsync)
+        public UpdateClientPositionManagerCommandHandler(IClientPositionManagerRepository repositoryAsync, IMapper mapper)
         {
             _repositoryAsync = repositoryAsync;
+            _mapper = mapper;
         }
 
         public Task<Response<Guid>> Handle(UpdateClientPositionManagerCommand request,
@@ -35,10 +38,8 @@ namespace Application.Features.ClientPositionsManager.Commands.UpdateClientPosit
         {
             var clientResponseManager = await _repositoryAsync.GetByIdAsync(request.Id, cancellationToken);
             if (clientResponseManager == null) throw new ApiExceptions($"register {request.Id} Not Found");
-            
-            clientResponseManager.ClientPositionId = request.ClientPositionId;
-            clientResponseManager.ResourceId = request.ResourceId;
-            clientResponseManager.Resource = request.Resource;
+
+            clientResponseManager = _mapper.Map(request, clientResponseManager);
             
             await _repositoryAsync.UpdateAsync(clientResponseManager, cancellationToken);
             return new Response<Guid>(clientResponseManager.Id);

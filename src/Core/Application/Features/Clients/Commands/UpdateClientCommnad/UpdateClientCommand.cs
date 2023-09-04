@@ -3,6 +3,7 @@ using Application.Extensions;
 using Application.Wrappers;
 using Atos.Core.Abstractions.Publishers;
 using Atos.Core.EventsDTO;
+using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
 using MediatR;
@@ -22,12 +23,14 @@ namespace Application.Features.Clients.Commands.UpdateClientCommnad
     {
         private readonly IClientRepository _repositoryAsync;
         private readonly IPublisherCommands<ClientUpdated> _publisherCommands;
+        private readonly IMapper _mapper;
 
         public UpdateClientCommandHandler(IClientRepository repositoryAsync,
-            IPublisherCommands<ClientUpdated> publisherCommands)
+            IPublisherCommands<ClientUpdated> publisherCommands, IMapper mapper)
         {
             _repositoryAsync = repositoryAsync;
             _publisherCommands = publisherCommands;
+            _mapper = mapper;
         }
 
         public Task<Response<Client>> Handle(UpdateClientCommand request,
@@ -44,8 +47,8 @@ namespace Application.Features.Clients.Commands.UpdateClientCommnad
             var client = await _repositoryAsync.GetByIdAsync(request.Id, cancellationToken);
             if (client == null) throw new ApiExceptions($"register {request.Id} Not Found");
 
-            client.Name = request.Name;
-            client.CountPositions = request.CountPositions;
+            client = _mapper.Map(request, client);
+            
 
             await _repositoryAsync.UpdateAsync(client, cancellationToken);
             await _publisherCommands.PublishEntityMessage(request.ToClientUpdated(), "client.updated", request.Id,
