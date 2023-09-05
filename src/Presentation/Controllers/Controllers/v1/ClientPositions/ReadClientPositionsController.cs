@@ -11,7 +11,7 @@ public class ReadClientPositionsController : BaseApiController
     {
     }
 
-    [HttpGet("id", Name = "GetClientPositionById")]
+    [HttpGet("{id}", Name = "GetClientPositionById")]
     public async Task<IActionResult> GetClientPositionById(Guid id, CancellationToken cancellationToken)
     {
         return Ok(await Mediator.Send(new GetClientPositionByIdQuery { Id = id }, cancellationToken));

@@ -11,7 +11,7 @@ public class ReadLeaveRequestsController : BaseApiController
     {
     }
 
-    [HttpGet("id", Name = "GetLeaveRequestById")]
+    [HttpGet("{id}", Name = "GetLeaveRequestById")]
     public async Task<IActionResult> GetLeaveRequestById(Guid id, CancellationToken cancellationToken)
     {
         return Ok(await Mediator.Send(new GetLeaveRequestByIdQuery { Id = id }, cancellationToken));

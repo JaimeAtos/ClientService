@@ -11,7 +11,7 @@ public class ReadClientsController : BaseApiController
     {
     }
 
-    [HttpGet("id", Name = "GetClientById")]
+    [HttpGet("{id}", Name = "GetClientById")]
     public async Task<IActionResult> GetClientById(Guid id, CancellationToken cancellationToken)
     {
         return Ok(await Mediator.Send(new GetClientByIdQuery { Id = id }, cancellationToken));
