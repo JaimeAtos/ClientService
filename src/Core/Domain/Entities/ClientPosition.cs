@@ -8,7 +8,7 @@ namespace Domain.Entities
         public Guid PositionId { get; set; }
         public string PositionDescription { get; set; } = null!;
         public int CurrentStateId { get; set; }
-        public string CurrentStateName { get; set; } = null!;
+        public string CurrentStateName { get; set; }
         public Client Client { get; set; } = null!;
         public ICollection<LeaveRequest> LeaveRequests { get; set; } = new List<LeaveRequest>();
 

@@ -12,7 +12,7 @@ namespace Application.Features.ClientPositions.Commands.CreateClientPositionComm
         public Guid PositionId { get; set; }
         public string PositionDescription { get; set; } = null!;
         public int CurrentStateId { get; set; }
-        public string CurrentStateName { get; set; } = null!;
+        public string CurrentStateName { get; set; }
     }
 
     public class
